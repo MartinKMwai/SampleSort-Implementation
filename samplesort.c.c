@@ -227,6 +227,7 @@ unsigned int *manager_thread; // to store and manage thread subsequence
     pthread_cond_broadcast(&gatekeeper_cond);
     thread_var = thread_var + one;
     pthread_mutex_unlock(&main_lock);
+    pthread_exit(NULL);
 }
 
 int main(int argc, char **argv)
@@ -312,7 +313,7 @@ int main(int argc, char **argv)
 
     // Start of Phase 2
 
-    qsort( all_threads * thread_number,samples, sizeof(unsigned int), compare);
+    qsort(samples, all_threads * thread_number, sizeof(unsigned int), compare);
 
     // Identifying Pivot values and storing them in pivots array 
     pivots = (unsigned int *) malloc((all_threads - one) * sizeof(unsigned int));
